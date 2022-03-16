@@ -1,0 +1,7 @@
+{
+    "app-name": "Char Recognizer",
+    "tunnels": {
+        "subdomain": "char-recognizer-api",
+        "port": "8888"
+    }
+}
