@@ -17,7 +17,7 @@ const run = (): void => {
         );
     });
 
-    if (toBoolean(process.env.TUNNELS)) {
+    if (toBoolean(process.env.TUNNELS || 'FALSE')) {
         createTunnel();
     }
 };

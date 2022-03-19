@@ -5,9 +5,10 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register ./src/index.ts --respawn --transpile-only --poll ./src/index.ts",
-    "dev": "cross-env NODE_ENV=development nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts",
-    "prod": "cross-env NODE_ENV=production nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts",
-    "lt": "lt --p 8888 --subdomain indigosoft-app-api",
+    "nodemon": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts",
+    "dev": "cross-env NODE_ENV=development npm run nodemon",
+    "prod": "cross-env NODE_ENV=production npm run start",
+    "lt": "lt --p 8888 --subdomain char-recognizer-api",
     "build": "tsc",
     "git:log": "git log --pretty=format:\"%h - %an, %ar : %s\""
   },
@@ -32,15 +33,11 @@
     "localtunnel": "^2.0.2",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
-    "nconf": "^0.11.3",
-    "patch-package": "^6.4.7",
     "reflect-metadata": "^0.1.13",
     "socket.io": "^4.4.1",
-    "stately.js": "^2.0.0",
     "to-boolean": "^1.0.0",
     "tslib": "^2.3.1",
-    "tsyringe": "^4.6.0",
-    "xstate": "^4.27.0"
+    "tsyringe": "^4.6.0"
   },
   "devDependencies": {
     "@types/config": "^0.0.41",
