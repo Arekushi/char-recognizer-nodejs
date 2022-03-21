@@ -5,11 +5,13 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register ./src/index.ts --respawn --transpile-only --poll ./src/index.ts",
+    "start:dist": "node dist/index.js",
+    "build": "tsc",
+    "postinstall": "tsc",
     "nodemon": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts",
     "dev": "cross-env NODE_ENV=development npm run nodemon",
     "prod": "cross-env NODE_ENV=production npm run start",
     "lt": "lt --p 8888 --subdomain char-recognizer-api",
-    "build": "tsc",
     "git:log": "git log --pretty=format:\"%h - %an, %ar : %s\""
   },
   "author": "",
@@ -58,5 +60,9 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.4.3",
     "typescript-tslint-plugin": "^1.0.1"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
   }
 }
