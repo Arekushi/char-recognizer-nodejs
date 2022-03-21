@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register ./src/index.ts --respawn --transpile-only --poll ./src/index.ts",
-    "start:dist": "node dist/index.js",
+    "start:dist": "node dist/src/index.js",
     "build": "tsc",
     "postinstall": "tsc",
     "nodemon": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts",
