@@ -1,6 +1,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
-import { inject, injectable, delay } from 'tsyringe';
+import { injectable } from 'tsyringe';
+import { ImageBase64 } from '@src/shared/utils/base64.utils';
 
 
 @injectable()
@@ -32,7 +33,7 @@ export class HandwrittenService {
             });
     }
 
-    async predict(image: Express.Multer.File): Promise<any> {
+    async predict(image: Express.Multer.File | ImageBase64): Promise<any> {
         const form = new FormData();
         form.append('image', image.buffer, image.originalname);
 

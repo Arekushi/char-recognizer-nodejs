@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { HandwrittenService } from './../services/handwritten.service';
 import { injectable, autoInjectable } from 'tsyringe';
+import { Advice, UseAspect } from '@arekushii/ts-aspect';
+import { CheckPredictRequestAspect } from '../aspects/check-predict-request.aspect';
+
 
 @injectable()
 @autoInjectable()
@@ -20,8 +23,9 @@ export class HandwrittenController {
         return res.json(result);
     }
 
+    @UseAspect(Advice.Before, CheckPredictRequestAspect)
     async predict(req: Request, res: Response): Promise<Response> {
-        const result = await this.service.predict(req.file);
+        const result = await this.service.predict(req.body.image);
         return res.json(result);
     }
 }
