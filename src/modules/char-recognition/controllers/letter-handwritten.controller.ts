@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { injectable, autoInjectable } from 'tsyringe';
 import { HandwrittenController } from './handwritten.controller';
-import { DigitHandwrittenService } from './../services/digit-handwritten.service';
+import { LetterHandwrittenService } from '../services/letter-handwritten.service';
 
 
 @injectable()
 @autoInjectable()
-export class DigitHandwrittenController extends HandwrittenController {
+export class LetterHandwrittenController extends HandwrittenController {
 
     constructor(
-        service: DigitHandwrittenService
+        service: LetterHandwrittenService
     ) {
         super(service);
     }

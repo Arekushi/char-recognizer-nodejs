@@ -1,5 +1,5 @@
 {
-    "app-name": "Char Recognizer",
+    "app-name": "Char Recognizer NodeJS API",
     "tunnels": {
         "subdomain": "char-recognizer-api",
         "port": "8888"

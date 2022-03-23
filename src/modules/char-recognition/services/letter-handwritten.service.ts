@@ -4,10 +4,10 @@ import config from 'config';
 
 
 @injectable()
-export class DigitHandwrittenService extends HandwrittenService {
+export class LetterHandwrittenService extends HandwrittenService {
 
     constructor() {
-        super(`${config.get('flask_api')}/digit-handwritten`)
+        super(`${config.get('flask_api')}/letter-handwritten`)
     }
 
 }

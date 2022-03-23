@@ -3,9 +3,11 @@ import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routes';
+import swaggerUI from 'swagger-ui-express';
 
 import { createServer, Server } from 'http';
 import { singleton } from 'tsyringe';
+import { specs } from './swagger';
 
 
 @singleton()
@@ -23,6 +25,12 @@ export class App {
 
     private routes(): void {
         this.app.use('/api', router());
+
+        this.app.get('/ping', (req, res) => {
+            return res.json({
+                result: 'pong'
+            });
+        });
     }
 
     private use(): void {
@@ -32,5 +40,10 @@ export class App {
         this.app.use(bodyParser.urlencoded({
             extended: false
         }));
+        // this.app.use(
+        //     '/swagger',
+        //     swaggerUI.serve,
+        //     swaggerUI.setup(specs)
+        // );
     }
 }

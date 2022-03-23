@@ -1,3 +1,4 @@
 {
-    "port": "8888"
+    "port": "8888",
+    "flask_api": "https://char-recognizer-flask-api.herokuapp.com/api"
 }

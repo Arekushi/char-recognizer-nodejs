@@ -5,6 +5,7 @@ import config from 'config';
 import { App } from './app';
 import { container } from 'tsyringe';
 import { createTunnel } from './localtunnel';
+import listEndpoints from 'express-list-endpoints';
 
 
 const run = (): void => {
@@ -16,6 +17,10 @@ const run = (): void => {
             `Node Express server listening on http://localhost:${port}`
         );
     });
+
+    if (toBoolean(process.env.LIST_ENDPOINTS || 'FALSE')) {
+        console.log(listEndpoints(app.app));
+    }
 
     if (toBoolean(process.env.TUNNELS || 'FALSE')) {
         createTunnel();
