@@ -37,7 +37,8 @@ export class App {
         this.app.use(morgan('dev'));
         this.app.use(express.json());
         this.app.use(cors({
-            origin: '*'
+            origin: '*',
+            allowedHeaders: '*'
         }));
         this.app.use(bodyParser.urlencoded({
             extended: false
