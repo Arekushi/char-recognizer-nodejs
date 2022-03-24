@@ -23,9 +23,9 @@ export class HandwrittenController {
         return res.json(result);
     }
 
-    @UseAspect(Advice.Before, CheckPredictRequestAspect)
+    // @UseAspect(Advice.Before, CheckPredictRequestAspect)
     async predict(req: Request, res: Response): Promise<Response> {
-        const result = await this.service.predict(req.body.image);
+        const result = await this.service.predict(req.file);
         return res.json(result);
     }
 }
