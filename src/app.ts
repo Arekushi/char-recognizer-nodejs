@@ -25,12 +25,6 @@ export class App {
 
     private routes(): void {
         this.app.use('/api', router());
-
-        this.app.get('/ping', (req, res) => {
-            return res.json({
-                result: 'pong'
-            });
-        });
     }
 
     private use(): void {

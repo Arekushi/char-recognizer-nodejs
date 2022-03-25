@@ -1,23 +1,23 @@
+import base64ToImage from 'base64-to-image'
+
 import { randomId } from './string.utils';
+import { ImageBase64 } from '../interfaces/image-base64.interface';
 
 
-export interface ImageBase64 {
-    mimetype?: string;
-    buffer?: Buffer;
-    originalname?: string;
-}
-
-
-export const decodeBase64Image = (dataString: string): ImageBase64 => {
-    const matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
-
-    if (matches.length !== 3) {
-        throw new Error('Invalid input string');
-    }
+export const decodeBase64Image = (base64: string): ImageBase64 => {
+    const parts = base64.split(';');
+    const mimetype = parts[0].split(':')[1];
+    const imagedata = parts[1].split(',')[1];
+    const buffer = Buffer.from(imagedata, 'base64');
 
     return {
-        mimetype: matches[1],
-        originalname: `${randomId()}.${matches[1].split('/')[1]}`,
-        buffer: Buffer.from(matches[2], 'base64')
+        mimetype,
+        buffer,
+        imagedata,
+        originalname: `${randomId()}.${mimetype.split('/')[1]}`,
     }
+}
+
+export const saveBase64 = (base64: string) => {
+    return base64ToImage(base64, 'src/assets/images/predict/', { type: 'png' });
 }

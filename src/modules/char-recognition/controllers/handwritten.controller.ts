@@ -1,3 +1,4 @@
+import { resizeImage } from './../../../shared/utils/image.utils';
 import { Request, Response } from 'express';
 import { HandwrittenService } from './../services/handwritten.service';
 import { injectable, autoInjectable } from 'tsyringe';
@@ -23,9 +24,9 @@ export class HandwrittenController {
         return res.json(result);
     }
 
-    // @UseAspect(Advice.Before, CheckPredictRequestAspect)
+    @UseAspect(Advice.Before, CheckPredictRequestAspect)
     async predict(req: Request, res: Response): Promise<Response> {
-        const result = await this.service.predict(req.file);
+        const result = await this.service.predict(req.body.image);
         return res.json(result);
     }
 }

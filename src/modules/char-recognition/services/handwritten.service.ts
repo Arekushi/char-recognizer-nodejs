@@ -1,16 +1,23 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import config from 'config';
+
+import { resizeImage } from './../../../shared/utils/image.utils';
+import { ImageBase64 } from './../../../shared/interfaces/image-base64.interface';
 import { injectable } from 'tsyringe';
-import { ImageBase64 } from '@src/shared/utils/base64.utils';
 
 
 @injectable()
 export class HandwrittenService {
 
     url: string;
+    #height: number;
+    #width: number;
 
     constructor(url: string) {
         this.url = url;
+        this.#height = Number(config.get('image.height'));
+        this.#width = Number(config.get('image.width'))
     }
 
     async createModel(): Promise<any> {
@@ -35,15 +42,17 @@ export class HandwrittenService {
 
     async predict(image: Express.Multer.File | ImageBase64): Promise<any> {
         const form = new FormData();
-        form.append('image', image.buffer, image.originalname);
+        const buffer = await resizeImage(image.buffer, this.#width, this.#height);
 
-        const request_config = {
+        form.append('image', buffer, image.originalname);
+
+        const requestConfig = {
             headers: {
                 ...form.getHeaders()
             }
         };
 
-        return axios.post(`${this.url}/predict`, form, request_config)
+        return axios.post(`${this.url}/predict`, form, requestConfig)
             .then((res) => {
                 return res.data
             })

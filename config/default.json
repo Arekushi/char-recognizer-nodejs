@@ -3,5 +3,9 @@
     "tunnels": {
         "subdomain": "char-recognizer-api",
         "port": "8888"
+    },
+    "image": {
+        "height": "28",
+        "width": "28"
     }
 }

@@ -9,6 +9,12 @@ const routes = (): Router => {
     router.use('/digit', digitHandwrittenRouter);
     router.use('/letter', letterHandwrittenRouter);
 
+    router.get('/ping', (req, res) => {
+        return res.json({
+            result: 'pong'
+        });
+    });
+
     return router;
 };
 
