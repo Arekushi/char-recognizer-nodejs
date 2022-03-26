@@ -2,4 +2,4 @@
 .env
 dist
 node_modules
-package-lock.json
+tslint-to-eslint-config.log

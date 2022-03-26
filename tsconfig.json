@@ -5,8 +5,13 @@
         "outDir": "dist",
         "paths": {
             "@src/*": ["./src/*"],
+            "@core/*": ["./src/core/*"],
             "@modules/*": ["./src/modules/*"],
             "@config/*": ["./src/config/*"],
+            "@assets/*": ["./src/assets/*"],
+            "@shared/*": ["./src/shared/*"],
+            "@utils/*": ["./src/shared/utils/*"],
+            "@recognition/*": ["./src/modules/char-recognition/*"]
         },
         "plugins": [
             {

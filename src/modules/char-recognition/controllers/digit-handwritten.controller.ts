@@ -1,7 +1,6 @@
-import { Request, Response } from 'express';
 import { injectable, autoInjectable } from 'tsyringe';
-import { HandwrittenController } from './handwritten.controller';
-import { DigitHandwrittenService } from './../services/digit-handwritten.service';
+import { HandwrittenController } from '@recognition/controllers/handwritten.controller';
+import { DigitHandwrittenService } from '@recognition/services/digit-handwritten.service';
 
 
 @injectable()
@@ -12,5 +11,6 @@ export class DigitHandwrittenController extends HandwrittenController {
         service: DigitHandwrittenService
     ) {
         super(service);
+        this.path = '/digit';
     }
 }

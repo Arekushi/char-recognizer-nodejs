@@ -1,16 +1,15 @@
-import { decodeBase64Image } from './../../../shared/utils/base64.utils';
-import { HandwrittenController } from './../controllers/handwritten.controller';
 import { Request, Response } from 'express';
-import { Aspect } from '@arekushii/ts-aspect';
+import { Aspect, AspectContext } from '@arekushii/ts-aspect';
+import { decodeBase64Image } from '@utils/base64.utils';
 
 
 export class CheckPredictRequestAspect implements Aspect {
 
-    execute(controller: HandwrittenController, args: any[]): [Request, Response] {
-        const req: Request = args[0];
-        const res: Response = args[1];
+    execute(ctx: AspectContext): [Request, Response] {
+        const req: Request = ctx.functionParams[0];
+        const res: Response = ctx.functionParams[1];
 
-        if (req.file || req.body.image) {            
+        if (req.file || req.body.image) {
             req.body.image = req.file || decodeBase64Image(req.body.image);
             return [req, res];
         }

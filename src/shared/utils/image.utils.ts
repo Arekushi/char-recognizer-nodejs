@@ -7,4 +7,4 @@ export const resizeImage = async (buffer: Buffer, width: number, height: number)
         .resize(width, height)
         .jpeg({ mozjpeg: true })
         .toBuffer();
-}
+};

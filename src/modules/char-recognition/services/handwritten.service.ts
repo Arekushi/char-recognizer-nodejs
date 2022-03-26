@@ -1,63 +1,48 @@
-import axios from 'axios';
-import FormData from 'form-data';
 import config from 'config';
 
-import { resizeImage } from './../../../shared/utils/image.utils';
-import { ImageBase64 } from './../../../shared/interfaces/image-base64.interface';
-import { injectable } from 'tsyringe';
+import { resizeImage } from '@utils/image.utils';
+import { ImageBase64 } from '@shared/interfaces/image-base64.interface';
+import { autoInjectable, injectable } from 'tsyringe';
+import { Service } from '@core/services/base.service';
+import { HttpService } from '@core/services/http.service';
+import { formData } from '@src/shared/utils/form.utils';
 
 
 @injectable()
-export class HandwrittenService {
+@autoInjectable()
+export class HandwrittenService extends Service {
 
     url: string;
     #height: number;
     #width: number;
 
-    constructor(url: string) {
-        this.url = url;
+    constructor(
+        http: HttpService
+    ) {
+        super(http, `${config.get('flask_api')}/handwritten`);
         this.#height = Number(config.get('image.height'));
-        this.#width = Number(config.get('image.width'))
+        this.#width = Number(config.get('image.width'));
     }
 
     async createModel(): Promise<any> {
-        return axios.get(`${this.url}/create-model`)
-            .then((res) => {
-                return res.data
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+        return this.get<any>('/create-model');
     }
 
     async evaluate(): Promise<any> {
-        return axios.get(`${this.url}/evaluate`)
-            .then((res) => {
-                return res.data
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+        return this.get<any>('/evaluate');
     }
 
     async predict(image: Express.Multer.File | ImageBase64): Promise<any> {
-        const form = new FormData();
         const buffer = await resizeImage(image.buffer, this.#width, this.#height);
 
-        form.append('image', buffer, image.originalname);
+        const form = formData([
+            ['image', buffer, image.originalname],
+        ]);
 
-        const requestConfig = {
+        return this.post<any>('/predict', form, {
             headers: {
                 ...form.getHeaders()
             }
-        };
-
-        return axios.post(`${this.url}/predict`, form, requestConfig)
-            .then((res) => {
-                return res.data
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+        });
     }
 }
