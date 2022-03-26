@@ -6,8 +6,8 @@
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register ./src/index.ts --respawn --transpile-only --poll ./src/index.ts",
     "start:dist": "node dist/src/index.js",
-    "build": "tsc",
-    "postinstall": "tsc",
+    "build": "tsc && tsc-alias",
+    "postinstall": "tsc && tsc-alias",
     "nodemon": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts",
     "dev": "cross-env NODE_ENV=development npm run nodemon",
     "prod": "cross-env NODE_ENV=production npm run start",
