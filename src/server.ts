@@ -5,6 +5,7 @@ import config from 'config';
 import { App } from './app';
 import { container } from 'tsyringe';
 import { createTunnel } from './localtunnel';
+import { Express } from 'express';
 import listEndpoints from 'express-list-endpoints';
 
 
@@ -19,7 +20,7 @@ const run = (): void => {
     });
 
     if (toBoolean(process.env.LIST_ENDPOINTS || 'FALSE')) {
-        console.log(listEndpoints(app.app));
+        console.log(listEndpoints(app.app as Express));
     }
 
     if (toBoolean(process.env.TUNNELS || 'FALSE')) {
