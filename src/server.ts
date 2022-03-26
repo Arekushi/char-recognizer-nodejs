@@ -1,3 +1,4 @@
+import listEndpoints from 'express-list-endpoints';
 import consola from 'consola';
 import toBoolean from 'to-boolean';
 import config from 'config';
@@ -6,7 +7,6 @@ import { App } from './app';
 import { container } from 'tsyringe';
 import { createTunnel } from './localtunnel';
 import { Express } from 'express';
-import listEndpoints from 'express-list-endpoints';
 
 
 const run = (): void => {
